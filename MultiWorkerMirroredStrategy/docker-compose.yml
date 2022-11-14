@@ -1,0 +1,29 @@
+version: '3.9'
+services:
+  worker:
+    hostname: worker
+    container_name: worker
+    image: learn/dtf:1.0.0
+    environment:
+      TF_CONFIG: "{
+            \"cluster\": {
+              \"chief\": [\"chief:2222\"],
+              \"worker\": [\"worker:2222\"]
+            },
+            \"task\": {\"type\": \"worker\", \"index\": 0}
+          }"
+    command: '/app/main.py'
+  chief:
+    hostname: chief
+    container_name: chief
+    image: learn/dtf:1.0.0
+    environment:
+      GOOGLE_APPLICATION_CREDENTIALS: /tmp/keys/creds.json
+      TF_CONFIG: "{
+            \"cluster\": {
+              \"chief\": [\"chief:2222\"],
+              \"worker\": [\"worker:2222\"]
+            },
+            \"task\": {\"type\": \"chief\", \"index\": 0}
+          }"
+    command: '/app/main.py'
