@@ -66,12 +66,17 @@ Nothing to talk about for now. 1st checkin
    ```sh
    git clone 
    ```
-    1. Build and run MultiWorkerMirroredStrategy code
-       ```sh
-       cd TFDevice/MultiWorkerMirroredStrategy
-       docker build -t learn/dtf:1.0.0 --progress=plain .
-       docker compose up -d
-       ```
+2. Build Base Docker Image
+   ```sh
+   cd BaseImage
+   docker build -t learn/basedtf:1.0.0 --progress=plain .
+   ```
+3. Build and run MultiWorkerMirroredStrategy task
+   ```sh
+   cd TFDevice/MultiWorkerMirroredStrategy
+   docker build -t learn/dtf-multiworker-strategy:1.0.0 --progress=plain .
+   docker compose up -d
+   ```
     
 <!-- USAGE EXAMPLES -->
 

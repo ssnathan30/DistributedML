@@ -3,7 +3,7 @@ services:
   worker1:
     hostname: worker1
     container_name: worker1
-    image: learn/dtf:1.0.0
+    image: learn/dtf-multiworker-strategy:1.0.0
     environment:
       TF_CONFIG: "{
             \"cluster\": {
@@ -16,7 +16,7 @@ services:
   worker2:
     hostname: worker2
     container_name: worker2
-    image: learn/dtf:1.0.0
+    image: learn/dtf-multiworker-strategy:1.0.0
     environment:
       TF_CONFIG: "{
               \"cluster\": {
@@ -29,7 +29,7 @@ services:
   chief:
     hostname: chief
     container_name: chief
-    image: learn/dtf:1.0.0
+    image: learn/dtf-multiworker-strategy:1.0.0
     environment:
       TF_CONFIG: "{
             \"cluster\": {
