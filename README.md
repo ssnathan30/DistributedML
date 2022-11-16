@@ -77,6 +77,17 @@ Nothing to talk about for now. 1st checkin
    docker build -t learn/dtf-multiworker-strategy:1.0.0 --progress=plain .
    docker compose up -d
    ```
+4 Build and run MeshTensorflow task
+   ```
+   CAUTION : 
+    1) This task runs in single container.
+    2) Its a long running job.
+   ```
+   ```sh
+   cd TFDevice/MeshTensorFlow
+   docker build -t learn/dtf-meshtensorflow:1.0.0 --progress=plain .
+   docker compose up -d
+   ```
     
 <!-- USAGE EXAMPLES -->
 

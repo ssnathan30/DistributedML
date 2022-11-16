@@ -1,0 +1,8 @@
+version: '3.9'
+services:
+  worker1:
+    hostname: worker1
+    container_name: worker1
+    image: learn/dtf-meshtensorflow:1.0.0
+    command:
+      - '/app/main.py'
