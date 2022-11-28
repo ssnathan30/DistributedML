@@ -1,0 +1,37 @@
+version: '3.9'
+services:
+  worker1:
+    hostname: worker1
+    container_name: worker1
+    image: learn/dtf-tfserver:1.0.0
+    environment:
+      CLUSTER_CONFIG: "{\n    \"worker\": [\"worker1:2222\", \"worker2:2222\"],\n    \"ps\" : [\"ps1:2222\"],\n    \"chief\" : [\"chief:2222\"]\n}"
+      job_type: "worker"
+      task_index: 0
+  worker2:
+    hostname: worker2
+    container_name: worker2
+    image: learn/dtf-tfserver:1.0.0
+    environment:
+      CLUSTER_CONFIG: "{\n    \"worker\": [\"worker1:2222\", \"worker2:2222\"],\n    \"ps\" : [\"ps1:2222\"],\n    \"chief\" : [\"chief:2222\"]\n}"
+      job_type: "worker"
+      task_index: 0
+  ps:
+    hostname: ps1
+    container_name: ps1
+    image: learn/dtf-tfserver:1.0.0
+    environment:
+      CLUSTER_CONFIG: "{\n    \"worker\": [\"worker1:2222\", \"worker2:2222\"],\n    \"ps\" : [\"ps1:2222\"],\n    \"chief\" : [\"chief:2222\"]\n}"
+      job_type: "ps"
+      task_index: 0
+  chief:
+    hostname: chief
+    container_name: chief
+    image: learn/dtf-psstrategy:1.0.0
+    depends_on:
+      - ps
+      - worker1
+      - worker2
+    environment:
+      CLUSTER_CONFIG: "{\n    \"worker\": [\"worker1:2222\", \"worker2:2222\"],\n    \"ps\" : [\"ps1:2222\"],\n    \"chief\" : [\"chief:2222\"]\n}"
+      NUM_PS: 1
