@@ -1,4 +1,4 @@
-<h3 align="center">Tensorflow Distributed ML Training</h3>
+<h3 align="center">Distributed ML Training</h3>
   <p align="center">
     <br />
     <br />
@@ -77,7 +77,7 @@ Nothing to talk about for now. 1st checkin
    docker build -t learn/dtf-multiworker-strategy:1.0.0 --progress=plain .
    docker compose up -d
    ```
-4 Build and run MeshTensorflow task
+4. Build and run MeshTensorflow task
    ```
    CAUTION : 
     1) This task runs in single container.
@@ -86,6 +86,28 @@ Nothing to talk about for now. 1st checkin
    ```sh
    cd TFDevice/MeshTensorFlow
    docker build -t learn/dtf-meshtensorflow:1.0.0 --progress=plain .
+   docker compose up -d
+   ```
+5. Build and run Parameterserver task
+   1. Build server Image
+      ```commandline
+      cd TFDevice/ParameterServerStrategy
+      cd server
+      docker build -t learn/dtf-tfserver:1.0.0 --progress=plain .
+      ```
+   2. Build Parameter server strategy Image
+      ```
+      cd ..
+      docker build -t learn/dtf-psstrategy:1.0.0 --progress=plain .
+      ```
+   3. Start docker compose
+      ```commandline
+      docker compose up -d
+      ```
+6. Build and run Distributed Pytorch task - Model Parallelism
+   ```commandline
+   cd TFDevice/DistributedPytorch
+   docker build -t learn/pytorch-rpc:1.0.0 --progress=plain .
    docker compose up -d
    ```
     

@@ -11,5 +11,6 @@ FROM continuumio/anaconda3
 
 COPY requirements.txt .
 
+RUN /opt/conda/bin/conda install -c pytorch pytorch
 RUN pip install -r requirements.txt
 RUN pip install numpy --upgrade

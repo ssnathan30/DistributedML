@@ -1,0 +1,62 @@
+version: '3.9'
+services:
+  master:
+    hostname: master
+    container_name: master
+    image: learn/pytorch-rpc:1.0.0
+    environment:
+      WORKER_SIZE: 3
+      MASTER_ADDR: master
+      MASTER_PORT: 2222
+      WORLD_SIZE: 5
+      RANK: 0
+    command: 'python3 -u /app/main.py'
+    depends_on:
+      - worker1
+      - worker2
+      - worker3
+      - ps
+  worker1:
+    hostname: worker1
+    container_name: worker1
+    image: learn/pytorch-rpc:1.0.0
+    environment:
+      WORKER_SIZE: 3
+      MASTER_ADDR: master
+      MASTER_PORT: 2222
+      WORLD_SIZE: 5
+      RANK: 1
+    command: 'python3 -u /app/main.py'
+  worker2:
+    hostname: worker2
+    container_name: worker2
+    image: learn/pytorch-rpc:1.0.0
+    environment:
+      WORKER_SIZE: 3
+      MASTER_ADDR: master
+      MASTER_PORT: 2222
+      WORLD_SIZE: 5
+      RANK: 2
+    command: 'python3 -u /app/main.py'
+  worker3:
+    hostname: worker3
+    container_name: worker3
+    image: learn/pytorch-rpc:1.0.0
+    environment:
+      WORKER_SIZE: 3
+      MASTER_ADDR: master
+      MASTER_PORT: 2222
+      WORLD_SIZE: 5
+      RANK: 3
+    command: 'python3 -u /app/main.py'
+  ps:
+    hostname: ps
+    container_name: ps
+    image: learn/pytorch-rpc:1.0.0
+    environment:
+      WORKER_SIZE: 3
+      MASTER_ADDR: master
+      MASTER_PORT: 2222
+      WORLD_SIZE: 5
+      RANK: 4
+    command: 'python3 -u /app/main.py'
